@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/* Open Routes : [No need to Token or Login] */
+Route::post('register',[ApiController::class,'register']);
+Route::post('login',[ApiController::class,'login']);
+
+/* Protected Routs : [For Access Need to Login & Access Token ]*/
+Route::middleware(['auth::santum'])->group(function () {
+    Route::get('profile',[ApiController::class,'profile']);
+    Route::get('logout',[ApiController::class,'logout']);
+});
+
+
