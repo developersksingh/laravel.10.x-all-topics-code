@@ -83,12 +83,24 @@ class ApiController extends Controller
 
     // Logout API (GET)
 
-    public function logout() {
-       auth()->user()->tokens()->delete();
-        return response()->json([[
-            "status" => true,
-            "message" => "User Logout Successfully",
-        ]]);
+    public function logout()
+{
+    // Check if the user is authenticated
+    if (auth()->check()) {
+        // Delete all of the user's tokens
+        auth()->user()->tokens()->delete();
 
+        return response()->json([
+            "status" => true,
+            "message" => "User Logged Out Successfully",
+        ], 200);
+    }else{
+        return response()->json([
+            "status" => false,
+            "message" => "No authenticated user found",
+        ], 401);
     }
+
+
+}
 }
