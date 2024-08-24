@@ -10,8 +10,7 @@ class ApiController extends Controller
 {
 
     //Register API (POST,FormData)
-    public function register(Request $request)
-    {
+    public function register(Request $request){
 
         // Data Validations
         $request->validate([
@@ -33,8 +32,7 @@ class ApiController extends Controller
     }
 
     // Login API (POST, FormData)
-    public function login(Request $request)
-    {
+    public function login(Request $request) {
         // Data Validations
         $request->validate([
             "email" => "required|email",
@@ -72,6 +70,12 @@ class ApiController extends Controller
 
     // Profile API (GET)
     public function profile() {
+        $userInfo  =  auth()->user();
+        return response()->json([[
+            "status" => true,
+            "message" => "Profile Information",
+            "userDetails"=>$userInfo
+        ]]);
 
     }
 

@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
-
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Sanctum\Sanctum;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,9 +25,8 @@ Route::post('register',[ApiController::class,'register']);
 Route::post('login',[ApiController::class,'login']);
 
 /* Protected Routs : [For Access Need to Login & Access Token ]*/
-Route::middleware(['auth::santum'])->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('profile',[ApiController::class,'profile']);
     Route::get('logout',[ApiController::class,'logout']);
 });
-
 
