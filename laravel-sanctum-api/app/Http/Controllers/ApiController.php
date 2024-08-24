@@ -47,7 +47,7 @@ class ApiController extends Controller
         if (!empty($userInfo)) {
             if (Hash::check($request->password, $userInfo->password)) {
                 // User Exists
-                $accessToken  =  $userInfo->createToken("myToken")->plainTextToken;
+                $accessToken  =  $userInfo->createToken("loginToken")->plainTextToken;
                 return response()->json([[
                     "status" => true,
                     "message" => "Login Successfull",
@@ -71,8 +71,11 @@ class ApiController extends Controller
     }
 
     // Profile API (GET)
-    public function profile() {}
+    public function profile() {
+
+    }
 
     // Logout API (GET)
+
     public function logout() {}
 }
