@@ -8,7 +8,11 @@ class ApiController extends Controller{
 
     //Register API (POST,FormData)
     public function register(Request $request){
-
+        $request->validate([
+          "name" => "required|max:100",
+          "email" => "required|email|unique:users",
+          "password" => "required|confirmed"
+        ]);
     }
 
     // Login API (POST, FormData)
