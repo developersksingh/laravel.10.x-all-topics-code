@@ -47,4 +47,11 @@ Inside :  laravel-sanctum-api\config\sanctum.php : Basic settings of sanctum , a
 
 Step 5. 
     Setups API Routes : Done Than php artisan migrate
+Register a new user API : http://localhost:8000/api/register  [postman body/row/ ] Type :  JSON
 
+{
+    "name": "Sanjay Singh",
+    "email":"sanjaysingh@gmail.com",
+    "password":123456,
+    "password_confirmation" :123456
+}
