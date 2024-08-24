@@ -12,7 +12,8 @@ class ApiController extends Controller
 {
 
     //Register API (POST,FormData)
-    public function register(Request $request){
+    public function register(Request $request)
+    {
 
         // Data Validations
         $request->validate([
@@ -34,7 +35,8 @@ class ApiController extends Controller
     }
 
     // Login API (POST, FormData)
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         // Data Validations
         $request->validate([
             "email" => "required|email",
@@ -53,8 +55,7 @@ class ApiController extends Controller
                     "message" => "Login Successfull",
                     "accessToken" => $accessToken
                 ]]);
-
-            }else{
+            } else {
                 return response()->json([[
                     "status" => false,
                     "message" => "password didn't match"
@@ -62,7 +63,7 @@ class ApiController extends Controller
             }
 
             // Sanctum Token Value
-        }else{
+        } else {
             return response()->json([[
                 "status" => false,
                 "message" => "Invalid login credentials"
@@ -71,36 +72,34 @@ class ApiController extends Controller
     }
 
     // Profile API (GET)
-    public function profile() {
+    public function profile()
+    {
         $userInfo  =  auth()->user();
         return response()->json([[
             "status" => true,
             "message" => "Profile Information",
-            "userDetails"=>$userInfo
+            "userDetails" => $userInfo
         ]]);
-
     }
 
     // Logout API (GET)
 
     public function logout()
-{
-    // Check if the user is authenticated
-    if (auth()->check()) {
-        // Delete all of the user's tokens
-        auth()->user()->tokens()->delete();
+    {
+        // Check if the user is authenticated
+        if (auth()->check()) {
+            // Delete all of the user's tokens
+            auth()->user()->tokens()->delete();
 
-        return response()->json([
-            "status" => true,
-            "message" => "User Logged Out Successfully",
-        ], 200);
-    }else{
-        return response()->json([
-            "status" => false,
-            "message" => "No authenticated user found",
-        ], 401);
+            return response()->json([
+                "status" => true,
+                "message" => "User Logged Out Successfully",
+            ], 200);
+        } else {
+            return response()->json([
+                "status" => false,
+                "message" => "No authenticated user found",
+            ], 401);
+        }
     }
-
-
-}
 }
